@@ -1,0 +1,978 @@
+/* global var */
+:root {
+    --main-color: #09092a; 
+    --second-color: #4d4dff;
+    --font-color1: #ffffff;
+    --font-color2: #aaa;
+    --content-color: #eee;
+}
+/* global var*/
+
+/* ========= config for all ========= */ 
+* {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+}
+
+
+*:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+/* ========= end config ========= */
+
+/* ========= toggle ========= */
+.toggle-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+}
+.toggle-switch {
+    background-color: #ccc;
+    width: 60px;
+    height: 32px;
+    border-radius: 16px;
+    position: relative;
+    transition: 0.4s;
+    cursor: pointer;
+}
+.toggle-switch::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00d";
+    font-weight: 900;
+    background-color: #fff;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    transition: 0.4;
+}
+.toggle-checkbox:checked + .toggle-switch {
+    background-color: #1ed61e;
+}
+.toggle-checkbox:checked + .toggle-switch::before {
+    content: "\f00c";
+    left: 32px;
+    color: #1ed61e;
+}
+/* ========= end toggle ========= */
+
+/*========= start datatable config =========*/
+
+table.dataTable thead th {
+    text-align: center;
+}
+
+table.dataTable tbody td i {
+    font-size: 22px;
+} 
+/* ========= end table config ========= */
+
+/* ========= start multi select drop down ========= */
+/* .mult-select-tag {
+    display: flex;
+    width:100%;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --tw-shadow-color: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+    --border-color: rgb(218, 221, 224);
+    margin-bottom: 10px;
+  }
+  
+  .mult-select-tag .wrapper {
+    width: 100%;
+  }
+  
+  .mult-select-tag .body {
+    display: flex;
+    border: 1px solid var(--font-color2);
+    background: white;
+    min-height: 2.15rem;
+    width:100%;
+    min-width: 14rem;
+    padding: 2px;
+  }
+  
+  .mult-select-tag .input-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    padding: 0.1rem;
+  }
+  
+  .mult-select-tag .input-body {
+    display: flex;
+    width: 100%;
+  }
+  
+  .mult-select-tag .input {
+    flex:1;
+    background: transparent;
+    border-radius: 0.25rem;
+    padding: 0.45rem;
+    margin: 10px;
+    color: #2d3748;
+    outline: 0;
+    border: 1px solid var(--border-color);
+  }
+  
+  .mult-select-tag .btn-container {
+    color: #e2eBf0;
+    padding: 0.5rem;
+    display: flex;
+    border-left: 1px solid var(--font-color2);
+  }
+  
+  .mult-select-tag button {
+    cursor: pointer;
+    width: 100%;
+    color: var(--font-color2);
+    outline: 0;
+    height: 100%;
+    border: none;
+    padding: 0;
+    background: transparent;
+    background-image: none;
+    text-transform: none;
+    margin: 0;
+  }
+  
+  .mult-select-tag button:first-child {
+    width: 1rem;
+    height: 90%;
+  }
+  
+  .mult-select-tag .drawer {
+    position: absolute;
+    background: white;
+    max-height: 15rem;
+    z-index: 40;
+    top: 98%;
+    width: 100%;
+    overflow-y: scroll;
+    border: 1px solid var(--font-color2);
+    border-radius: 0.25rem;
+  }
+  
+  .mult-select-tag ul {
+    list-style-type: none;
+    padding: 0.5rem;
+    margin: 0;
+  }
+  
+  .mult-select-tag ul li {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .mult-select-tag ul li:hover {
+    background: rgb(243 244 246);
+  }
+  
+  .mult-select-tag .item-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 0.2rem 0.4rem;
+    margin: 0.2rem;
+    font-weight: 500;
+    background: var(--second-color);
+    border-radius: 10px;
+  }
+  
+  .mult-select-tag .item-label {
+    max-width: 100%;
+    line-height: 1;
+    font-size: 0.75rem;
+    font-weight: 400;
+    flex: 0 1 auto;
+    color: #ffffff;
+  }
+  
+  .mult-select-tag .item-close-container {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row-reverse;
+  }
+  
+  .mult-select-tag .item-close-svg {
+    width: 1rem;
+    margin-left: 0.5rem;
+    height: 1rem;
+    cursor: pointer;
+    border-radius: 9999px;
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .mult-select-tag .shadow  {
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+  
+  .mult-select-tag .rounded {
+    border-radius: .375rem;
+  } */
+  
+/* ========= end multi select drop down ========= */
+
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ========= start nav bar ========= */
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: var(--main-color);
+    padding: 20px;
+    position: relative;
+    color: var(--font-color1);
+    box-shadow: 0 0 10px #000;
+    position: fixed;
+    transition: .3s;
+}
+.sidebar .logo-company{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.sidebar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.sidebar > h3 {
+    height: fit-content;
+}
+.sidebar ul li .op-nav {
+    padding: 10px ;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--font-color1);
+    border-radius: 6px; 
+    transition: 0.4s;
+}
+
+.sidebar ul {
+    position: relative;
+    height: 90%;
+}
+
+.sidebar ul .last{
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+.sidebar ul li .op-nav:hover,
+.sidebar ul li .op-nav.actives {
+    background-color: #21216a;
+}
+.sidebar ul li span {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+@media (max-width: 767px) {
+    .sidebar {
+        width: 60px;
+        padding: 10px;
+    }
+    .sidebar .logo-company h3 {
+        display: none;
+    }
+    .sidebar ul li .op-nav span {
+        display: none;
+        margin-left: 0;
+    }
+    .sidebar ul li .op-nav {
+        justify-content: center;
+    }
+}
+/* ========= for dropdown menu setting option ========= */
+.op-nav {
+    position: relative;
+}
+
+.op-nav ul {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    background-color: #21216a;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 10px 10px 10px 55px;
+    line-height: 30px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: none;
+    transition: .3s;
+}
+
+.collapse__link {
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    transition: .3s;
+}
+
+.menu-coll:hover ul {
+    display: flex;
+}
+
+.menu-coll:hover .collapse__link {
+    transform: rotate(180deg);
+}
+
+.op-nav ul a {
+    color: #fff;
+    transition: .3s;
+}
+
+.op-nav ul a:hover {
+    background-color: #bebeef;
+    padding: 2px;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+
+@media (max-width: 767px) {
+    .op-nav ul {
+        width: 200px;
+        border-top-right-radius: 5px;
+        box-shadow: 1px 5px 7px 1px #00000057;
+    }
+    .collapse__link {
+        display: none;
+    }
+}
+/* ========= end nav bar =========*/
+
+/* ========= start content ========= */
+.content {
+    margin-left: 250px;
+    width: 100%;
+    background-color: var(--content-color); 
+}
+@media (max-width: 767px) {
+    .content {
+        margin-left: 60px;
+    }
+}
+/* ========= start head of content =========*/
+.head {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+}
+.head button {
+    background-color: var(--second-color);
+    border: none;
+    color: var(--font-color1);
+    font-weight: 600;
+    width: 90px;
+    text-transform: uppercase;
+    padding: 8px;
+    border-radius: 20px;
+}
+.head .icons {
+    display: flex;
+    align-items: center;
+}
+.head .icons span {
+    position: relative;
+}
+.head .icons span::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    top: -17px;
+    right: -13px;
+}
+.head .icons span i {
+    font-size: 18px;
+}
+.head img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+.content h2 {
+    margin: 10px;
+}
+/* ========= end head of content ========= */
+
+/* --------------------------------------index file----------------------------------------- */
+/* ========= contaner index ========= */
+.signin-page {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+}
+
+.signin-page img {
+    width: 600px;
+    max-width: 100%;
+}
+@media (max-width: 992px) {
+    .signin-page img {
+        display: none;
+    }
+    .signin-page {
+        align-items: center;
+    }
+}
+.signin-page .form-sign { 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.signin-page form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.signin-page form h1{
+    margin: 0 0 10px;
+    color: var(--second-color);
+}
+.signin-page form p {
+    color: #d6d6d6;
+    margin-bottom: 25px;
+}
+.signin-page .form-sign form input {
+    padding: 12px;
+    margin-top: 20px;
+    width: 370px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+}
+.signin-page .form-sign form a {
+    text-align: left; 
+    margin-left: 15px;
+    margin-top: 5px;
+    color: var(--second-color);
+    font-size: 13px;
+}
+.signin-page .form-sign form a:hover {
+    color: var(--main-color);
+}
+.signin-page .form-sign form input[type="submit"]{
+    border: none;
+    background-color: var(--second-color);
+    color: var(--font-color1);
+    font-weight: 700;
+}
+/* --------------------------------------end index file----------------------------------------- */
+
+/*==========================
+=====for all container======
+==========================*/
+
+.cont {
+    padding: 20px;
+}
+
+/*==========================
+=====end all container======
+==========================*/
+
+/* --------------------------------------start dashboard file----------------------------------------- */
+
+.dashboard-page {
+    
+}
+
+/* =========== first row =========== */
+
+.dashboard-page .row-dash {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dashboard-page .box-dash {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dashboard-page .side-one {
+    width: 59%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px,1fr));
+    gap: 10px;
+}
+
+.dashboard-page .side-one .small-box {
+    display: flex;  
+    padding: 25px; 
+}
+
+.dashboard-page .side-one .small-box .icon-small-box {
+    /* background-image: linear-gradient(to bottom right, var(--second-color), #607d8b); */
+    background-color: var(--second-color);
+    border-radius: 5px;
+    padding: 5px;
+    width: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 28px;
+    color: #fff;
+    box-shadow: 2px 2px 9px 0px #00000063
+}
+
+.dashboard-page .side-one .small-box .text-small-box {
+    line-height: 2;
+}
+
+.dashboard-page .side-one .small-box .text-small-box h3{
+
+}
+
+.dashboard-page .side-one .small-box .text-small-box p {
+    color: #878787;
+}
+
+.dashboard-page .side-two {
+    width: 39%;
+}
+
+.dashboard-page .head-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* height: 30%; */
+}
+
+.dashboard-page .head-box button {
+    border: none;
+    background-color: var(--second-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+}
+
+.dashboard-page .side-two .circle-prog {
+    /* height: 70%; */
+    padding: 20px;
+    position: relative;
+}
+
+.prograss-bar {
+    display: grid;
+    grid-template-columns: repeat(1, 160px);
+    grid-gap: 80px;
+    margin: 0 auto;
+    width: 200px
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+  
+.prograss-bar .box {
+    width: 100%;
+}
+  
+.prograss-bar .box .chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 40px;
+    line-height: 160px;
+    height: 160px;
+    color: rgb(0, 0, 0);
+}
+  
+.prograss-bar .box canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    width: 100%;
+}
+
+@media (max-width: 844px) {
+    .dashboard-page .row-dash {
+        flex-direction: column;
+    }
+    .dashboard-page .side-one {
+        width: 100%;
+    }
+    .dashboard-page .side-two {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* @media (max-width: 1272px) {
+    .circle-prog{
+        position: relative;
+        height: 90%;
+    }
+    .prograss-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}*/
+@media (min-width: 845px) {
+    .circle-prog{
+        height: 90%;
+        position: relative;
+    }
+    .prograss-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+} 
+/* =========== second row =========== */
+
+.dashboard-page .side-one-row-two {
+    display: block;
+}
+
+.dashboard-page .side-one .table {
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.dashboard-page .side-two .user-active {
+    display: flex;
+    border-bottom: 1px solid var(--content-color);
+    padding: 5px;
+}
+
+.dashboard-page .side-two .user-active .img-user {
+    position: relative;
+    height: fit-content;
+}
+
+.dashboard-page .side-two .user-active img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 15px;
+    
+}
+
+.dashboard-page .side-two .user-active .img-user::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #04e500;
+    bottom: 2px;
+    right: 11px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.dashboard-page .side-two .user-active .text {
+    line-height: 1.5;
+}
+
+.dashboard-page .side-two .user-active .text p {
+    color : #878787;
+    font-size: 13px;
+}
+
+/*
+=====================
+==for percent value==
+=====================
+*/
+
+.circular-progress {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  .circular-progress:before {
+    content: "";
+    position: absolute;
+    height: 84%;
+    width: 84%;
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+  .value-container {
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-size: 50px;
+    color: #231c3d;
+  }
+  .d_none {
+    display: none;
+  }
+
+/* --------------------------------------end dashboard file----------------------------------------- */
+
+/* --------------------------------------start setting file----------------------------------------- */
+.setting-page {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 10px;
+}
+
+.setting-page .widget {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.setting-page .widget .widget-content {
+    margin-bottom: 30px;
+}
+
+.setting-page .widget h3 {
+    margin-bottom: 20px;
+    color: var(--second-color);
+}
+
+/* .setting-page .widget p {
+    color: var(--font-color2);
+    font-weight: bold;
+    margin-bottom: 10px;
+} */
+
+/*--- radio button ---*/
+.setting-page .widget .options {
+    padding: 30px;
+    width: fit-content;
+}
+.setting-page .widget .options label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.setting-page .widget .options label input {
+    /* display: none; */
+    margin: 0 5px;
+}
+/*--- end radio button ---*/
+.setting-page .widget button {
+    border: none;
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: var(--second-color);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    align-self: end;
+    margin: 20px 0;
+    position: absolute;
+    bottom: 0;
+ }
+/* -- info section -- */
+.setting-page .widget h4 {
+    margin-bottom: 15px;
+}
+.setting-page .widget .info .name {
+    margin-bottom: 20px;
+}
+ .setting-page .widget .info .name input {
+    border-radius: 5px;
+    border: 1px solid var(--font-color2);
+    padding: 10px;
+    width: 100%;
+}
+.setting-page .widget .up-logo {
+    width: 100%;
+    background-color: #eee;
+    padding: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px dashed var(--font-color2);
+}
+
+.setting-page .widget .up-logo i {
+    font-size: 50px;
+    color: var(--font-color2);
+    margin-bottom: 20px;
+}
+.setting-page .widget .up-logo p {
+    color: var(--font-color2);
+}
+
+
+.setting-page .widget .up-logo span {
+    color: var(--second-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.setting-page .widget .account .pass {
+    display: flex;
+    flex-direction: column;
+}
+.setting-page .widget .account .pass input {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--font-color2);
+    padding: 10px;
+}
+/* --------------------------------------end setting file----------------------------------------- */
+/* --------------------------------------start department file----------------------------------------- */
+
+.head-of-section {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 7px;
+    align-items: center;
+}
+
+.head-of-section button {
+    border: none;
+    background-color: var(--second-color);
+    color: #fff;
+    border-radius: 7px;
+    font-weight: 600;
+    height: fit-content;
+    padding: 10px;
+}
+
+.list-section {
+    border-radius: 7px;
+    background-color: #fff;
+    margin-top: 10px;
+    padding: 20px;
+    overflow-x: auto;
+}
+/* --------------------------------------end department file----------------------------------------- */
+
+/* --------------------------------------start request file----------------------------------------- */
+.time-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+.time-input label {
+    font-weight: 500;
+}
+.time-input select {
+    padding: 10px;
+    border-color: var(--font-color2);
+    border-radius: 5px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.time-input select:focus {
+    border-color: var(--second-color);
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
+/* priority in form  */
+.btn-outline-primary {
+    color: var(--second-color);
+    border-color: var(--second-color);
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: var(--second-color);
+    border-color: var(--second-color);
+}
+
+.btn-check:active+.btn-outline-primary, 
+.btn-check:checked+.btn-outline-primary,
+.btn-outline-primary.active, 
+.btn-outline-primary.dropdown-toggle.show, 
+.btn-outline-primary:active {
+    color: #fff;
+    background-color: var(--second-color);
+    border-color: var(--second-color);
+}
+/* end priority in form  */
+
+/* start box modal popup  */
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.input-box label{
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.input-box input {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 10px;
+}
+.input-box input:focus {
+    border-color: var(--second-color);
+}
+.modal-footer .btn-primary {
+    background-color: var(--second-color);
+}
+/* end box modal popup  */
+.btn-group, .btn-group-vertical { 
+    width: 100%;
+}
+/* --------------------------------------end request file----------------------------------------- */
+
+
+
+
+
+
+
