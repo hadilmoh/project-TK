@@ -29,6 +29,8 @@
         <!-- end google fonts  -->
         <!-- sweetalert for alert -->
         <link rel="stylesheet" href="sweetalert2.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     </head>
     <body>
         <!-- start form Modal -->
@@ -48,42 +50,42 @@
 
                             <div class="mb-3">
                                 <label for="">Request name</label>
-                                <input type="text" name="r_name" class="form-control" />
+                                <input type="text" id="s_request_name" name="name" class="form-control" />
                             </div>
                             <div class="mb-3">
                                 <label for="">Manager</label>
-                                <select class="form-select" name="department_id" id="department_id" aria-label="Default select example">
+                                <select class="form-select" multiple="multiple" name="id[]" id="id" aria-label="Default select example">
                                     <option selected="" disabled="" value="">select dapartment</option>    
                                 
                                     <?php                                   
-                                    $query = "SELECT * FROM department WHERE department_status='1'";
+                                    $query = "SELECT * FROM departments WHERE status='1'";
                                     $query_run = mysqli_query($con, $query);
                                         foreach($query_run as $dept){
                                             ?>
-                                            <option value="<?php echo $dept['department_id']?>"><?php echo $dept['department_name']?></option>
+                                            <option value="<?php echo $dept['id']?>"><?php echo $dept['name']?></option>
                                             <?php
                                         }
                                  
                                     ?>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="">Group</label>
                                 <select class="form-select"  name="" id="">
-                                    <option selected="" disabled="" value="" >select department first</option>   
+                                    <option selected="" disabled="" value="" >select departments first</option>   
                                 </select>
                                 
-                            </div>
+                            </div> -->
                             <!-- OR -->
                             <div class="mb-3">
                                 <label for="">User</label>
-                                <select class="form-select"  name="" id="">
-                                    <option selected="" disabled="" value="" >select department first</option> 
+                                <select class="form-select" multiple  name="users[]" id="s_users">
+                                    <option selected="" disabled="" value="" >select departments first</option> 
                                 </select> 
                             </div>
                             <div class="mb-3">
                                 <label for="">Priority</label>
-                                <select class="form-select" name="r_priority" id="r_priority" aria-label="Default select example">
+                                <select class="form-select js-example-basic-multiple"  name="priority" id="s_priority" aria-label="Default select example">
                                     <option value="normal" selected>normal</option>
                                     <option value="important">important</option>
                                     <option value="urgent">urgent</option>
@@ -93,7 +95,7 @@
                                 <label for="">Duration</label>
                                 <div class="time-input" >
                                     <label for="">Day</label>
-                                    <select name="r_day">
+                                    <select id="s_day" name="day">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -107,7 +109,7 @@
                                         <option value="10">10</option>
                                     </select>
                                     <label for="">hour</label>
-                                    <select name="r_hour">
+                                    <select id="s_hour" name="hour">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -160,44 +162,44 @@
 
                             <div class="mb-3">
                                 <label for="">Request name</label>
-                                <input type="text" name="r_name" id="r_name" class="form-control" />
+                                <input type="text" name="name" id="u_request_name" class="form-control" />
                             </div>
                             <div class="mb-3">
                                 <label for="">Manager</label>
-                                <select class="form-select" name="department_id" id="department_id" aria-label="Default select example">
+                                <select class="form-select" multiple name="id" id="u_departments" aria-label="Default select example">
                                     <option selected="" disabled="" value="">select dapartment</option>    
                                 
                                     <?php                                   
-                                    $query = "SELECT * FROM department WHERE department_status='1'";
+                                    $query = "SELECT * FROM departments WHERE status='1'";
                                     $query_run = mysqli_query($con, $query);
                                         foreach($query_run as $dept){
                                             ?>
-                                            <option value="<?php echo $dept['department_id']?>"><?php echo $dept['department_name']?></option>
+                                            <option value="<?php echo $dept['id']?>"><?php echo $dept['name']?></option>
                                             <?php
                                         }
                                  
                                     ?>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="">Group</label>
                                 <select class="form-select"  name="" id="">
-                                    <option selected="" disabled="" value="" >select department first</option>   
+                                    <option selected="" disabled="" value="" >select departments first</option>   
                                 </select>
                                 
-                            </div>
+                            </div> -->
                             <!-- OR -->
                             <div class="mb-3">
                                 <label for="">User</label>
-                                <select class="form-select"  name="" id="">
-                                    <option selected="" disabled="" value="" >select department first</option> 
+                                <select class="form-select" multiple  name="" id="u_users">
+                                    <option selected="" disabled="" value="" >select departments first</option> 
                                 </select> 
                             </div>
 
                         
                         <div class="mb-3 select-data">
                             <label for="">Priority</label>
-                            <select class="form-select" name="r_priority" id="r_priority" aria-label="Default select example">
+                            <select class="form-select" name="priority" id="u_priority" aria-label="Default select example">
                                 <option value="normal">normal</option>
                                 <option value="important">important</option>
                                 <option value="urgent">urgent</option>
@@ -207,7 +209,7 @@
                                 <label for="">Duration</label>
                                 <div class="time-input" >
                                     <label for="">Day</label>
-                                    <select name="r_day" id="r_day">
+                                    <select name="day" id="u_day">
                                         <option value="0">0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -221,7 +223,7 @@
                                         <option value="10">10</option>
                                     </select>
                                     <label for="">hour</label>
-                                    <select name="r_hour" id="r_hour">
+                                    <select name="hour" id="u_hour">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -385,7 +387,7 @@
                                 
                                 <?php
 
-                                $query = "SELECT * FROM support";
+                                $query = "SELECT * FROM requests";
                                 $query_run = mysqli_query($con, $query);
 
                                 if(mysqli_num_rows($query_run) > 0)
@@ -394,22 +396,22 @@
                                     {
                                         ?>
                                         <tr class="text-center">
-                                            <td><?= $request['r_id'] ?></td>
-                                            <td><?= $request['r_name'] ?></td>
-                                            <td><?= ( $request['r_day'] * 24 ) + $request['r_hour'] ?> hours</td>
-                                            <td><?= $request['r_priority'] ?></td>
+                                            <td><?= $request['id'] ?></td>
+                                            <td><?= $request['name'] ?></td>
+                                            <td><?= ( $request['day'] * 24 ) + $request['hour'] ?> hours</td>
+                                            <td><?= $request['priority'] ?></td>
                                             <td>
-                                                <button type="button" value="<?=$request['r_id'];?>" class="editRequestBtn" style="font-size: 25px; border: 0; background-color: transparent;color: #aaa;">
+                                                <button type="button" value="<?=$request['id'];?>" class="editRequestBtn" style="font-size: 25px; border: 0; background-color: transparent;color: #aaa;">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
                                             </td>
                                             <td>
                                             <?php                                
-                                            if($request['request_status']==1) {
-                                                echo '<p><a href="code.php?r_id='.$request['r_id'].'&request_status=0" class="active" style="color: green"><i class="fa-solid fa-circle-check"></i></a></p>';
+                                            if($request['status']==1) {
+                                                echo '<p><a href="code.php?id='.$request['id'].'&status=0" class="active" style="color: green"><i class="fa-solid fa-circle-check"></i></a></p>';
                                             }
-                                            else if($request['request_status']==0) {
-                                                echo '<p><a href="code.php?r_id='.$request['r_id'].'&request_status=1" class="deactive" style="color: red"><i class="fa-solid fa-circle-xmark"></i></a></p>';
+                                            else if($request['status']==0) {
+                                                echo '<p><a href="code.php?id='.$request['id'].'&status=1" class="deactive" style="color: red"><i class="fa-solid fa-circle-xmark"></i></a></p>';
                                             }
                                             ?>
                                             </td>
@@ -430,133 +432,57 @@
         
         <!-- sweetalert2 for alert -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="fun.js"></script>
 
 
         <!--start links for form  -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
         <!--end links for form  -->
 
+<script>
+$(document).on('change', '#id', function(e){
+    loadData($(this).val());
+});
 
-        
-        <script>
-            // insert data from form
-            $(document).on('submit', '#saveRequest', function (e) {
-                e.preventDefault();
+$(document).on('change', '#u_departments', function(e){
+    loadData($(this).val());
+});
 
-                var formData = new FormData(this);
-                formData.append("save_request", true);
 
-                $.ajax({
-                    type: "POST",
-                    url: "code.php",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        
-                        var res = jQuery.parseJSON(response);
-                        if(res.status == 422) {
-                            $('#errorMessage').removeClass('d-none');
-                            $('#errorMessage').text(res.message);
+$(document).on('submit', '#saveRequest', function (e) {
+    e.preventDefault();
+    var name =  $("#s_request_name").val();
+    var day = $("#s_day").val();
+    var hour = $("#s_hour").val();
+    var priority = $("#s_priority").val();
+    var users = $("#s_users").val();
+    
+    saveRequest(name,day,hour,priority,users);
+    location.reload();
+});
 
-                        }else if(res.status == 200){
+$(document).on('click', '.editRequestBtn', function () {
+    var request_id = $(this).val();
+    getRequest(request_id);
+});
+$(document).on('submit', '#updateRequest', function (e) {
+    e.preventDefault();
+    
+    var name =  $("#u_request_name").val();
+    var day = $("#u_day").val();
+    var hour = $("#u_hour").val();
+    var priority = $("#u_priority").val();
+    var users = $("#u_users").val();
+    var request_id = $("#request_id").val();
 
-                            $('#errorMessage').addClass('d-none');
-                            $('#requestAddModal').modal('hide');
-                            $('#saveRequest')[0].reset();
-
-                            Swal.fire({
-                                icon:'success',
-                                title:'done',
-                                text:'done the save'
-                            })
-
-                            $('#datatableid').load(location.href + " #datatableid");
-
-                        }else if(res.status == 500) {
-                            alert(res.message);
-                        }
-                    }
-                });
-
-            });
-            // end insert data from form 
-
-            // update data
-            $(document).on('click', '.editRequestBtn', function () {
-
-                var request_id = $(this).val();
-                $.ajax({
-                    type: "GET",
-                    url: "code.php?request_id=" + request_id,
-                    success: function (response) {
-
-                        var res = jQuery.parseJSON(response);
-                        if(res.status == 404) {
-
-                            alert(res.message);
-                        }else if(res.status == 200){
-
-                            $('#request_id').val(res.data.r_id);
-                            $('#r_name').val(res.data.r_name);
-                            $('#r_day').val(res.data.r_day);
-                            $('#r_hour').val(res.data.r_hour);
-
-                            var select_data = (res.data.r_priority);
-                            $('.select-data option').each(function() {
-                                if($(this).val() == select_data) {
-                                    $(this).prop("selected", true);
-                                }
-                            });
-
-                            $('#requestEditModal').modal('show');
-                        }
-
-                    }
-                });
-
-            });
-
-            $(document).on('submit', '#updateRequest', function (e) {
-                e.preventDefault();
-
-                var formData = new FormData(this);
-                formData.append("update_request", true);
-
-                $.ajax({
-                    type: "POST",
-                    url: "code.php",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        
-                        var res = jQuery.parseJSON(response);
-                        if(res.status == 422) {
-                            $('#errorMessageUpdate').removeClass('d-none');
-                            $('#errorMessageUpdate').text(res.message);
-
-                        }else if(res.status == 200){
-
-                            $('#errorMessageUpdate').addClass('d-none');
-
-                            alertify.set('notifier','position', 'top-right');
-                            alertify.success(res.message);
-                            
-                            $('#requestEditModal').modal('hide');
-                            $('#updateRequest')[0].reset();
-
-                            $('#datatableid').load(location.href + " #datatableid");
-
-                        }else if(res.status == 500) {
-                            alert(res.message);
-                        }
-                    }
-                }); 
-            });
+    updateRequest(name,day,hour,priority,users,request_id);
+    location.reload();
+});
 
             // end update data
         </script>
@@ -588,7 +514,7 @@
                     if (result.isConfirmed) {
                         swalWithBootstrapButtons.fire(
                         'Activated!',
-                        'Your department has been Activated.',
+                        'Your departments has been Activated.',
                         'success'
                         )
                         location.href= self.attr('href');
@@ -598,7 +524,7 @@
                     ) {
                         swalWithBootstrapButtons.fire(
                         'Cancelled',
-                        'department is inactive :)',
+                        'departments is inactive :)',
                         'error'
                         )
                     }
@@ -630,7 +556,7 @@
                 if (result.isConfirmed) {
                     swalWithBootstrapButtons.fire(
                     'deactivated!',
-                    'Your department has been deactivated.',
+                    'Your departments has been deactivated.',
                     'success'
                     )
                     location.href= self.attr('href');
@@ -640,7 +566,7 @@
                 ) {
                     swalWithBootstrapButtons.fire(
                     'Cancelled',
-                    'department is active :)',
+                    'departments is active :)',
                     'error'
                     )
                 }

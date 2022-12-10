@@ -8,15 +8,15 @@ require 'dbcon.php';
 if(isset($_POST['save_request']))
 {
 
-    $r_name = mysqli_real_escape_string($con, $_POST['r_name']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
 
     //department and (group or user)
 
-    $r_day = mysqli_real_escape_string($con, $_POST['r_day']);
-    $r_hour = mysqli_real_escape_string($con, $_POST['r_hour']);
-    $r_priority = mysqli_real_escape_string($con, $_POST['r_priority']);
+    $day = mysqli_real_escape_string($con, $_POST['day']);
+    $hour = mysqli_real_escape_string($con, $_POST['hour']);
+    $priority = mysqli_real_escape_string($con, $_POST['priority']);
 
-    if($r_name == NULL || $r_priority == NULL)
+    if($name == NULL || $priority == NULL)
     {
         $res = [
             'status' => 422,
@@ -26,7 +26,7 @@ if(isset($_POST['save_request']))
         return;
     }
 
-    $query = "INSERT INTO support (r_name,r_day,r_hour,r_priority) VALUES ('$r_name','$r_day','$r_hour','$r_priority')";
+    $query = "INSERT INTO requests (name,day,hour,priority) VALUES ('$name','$day','$hour','$priority')";
     $query_run = mysqli_query($con, $query);
 
 
@@ -56,12 +56,12 @@ if(isset($_POST['update_request']))
 {
     $request_id = mysqli_real_escape_string($con, $_POST['request_id']);
 
-    $r_name = mysqli_real_escape_string($con, $_POST['r_name']);
-    $r_day = mysqli_real_escape_string($con, $_POST['r_day']);
-    $r_hour = mysqli_real_escape_string($con, $_POST['r_hour']);
-    $r_priority = mysqli_real_escape_string($con, $_POST['r_priority']);
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $day = mysqli_real_escape_string($con, $_POST['day']);
+    $hour = mysqli_real_escape_string($con, $_POST['hour']);
+    $priority = mysqli_real_escape_string($con, $_POST['priority']);
 
-    if($r_name == NULL || $r_priority == NULL)
+    if($name == NULL || $priority == NULL)
     {
         $res = [
             'status' => 422,
@@ -71,8 +71,8 @@ if(isset($_POST['update_request']))
         return;
     }
 
-    $query = "UPDATE support SET r_name='$r_name', r_day='$r_day', r_hour='$r_hour', r_priority='$r_priority' 
-              WHERE r_id='$request_id'";
+    $query = "UPDATE requests SET name='$name', day='$day', hour='$hour', priority='$priority' 
+              WHERE id='$request_id'";
     $query_run = mysqli_query($con, $query);
 
     if($query_run)
@@ -101,13 +101,25 @@ if(isset($_GET['request_id']))
 {
     $request_id = mysqli_real_escape_string($con, $_GET['request_id']);
 
-    $query = "SELECT * FROM support WHERE r_id='$request_id'";
-    $query_run = mysqli_query($con, $query);
+   // $query = "SELECT * FROM requests WHERE id='$request_id'";
+  //  $query_run = mysqli_query($con, $query);
   
 
-    if(mysqli_num_rows($query_run) == 1)
-    {
-        $request = mysqli_fetch_array($query_run);
+    $result = mysqli_query($con, "SELECT * FROM requests WHERE id = '$request_id' LIMIT 1");
+    $request = $result->fetch_assoc();
+    
+    
+    $result = mysqli_query($con, "SELECT user_id FROM request_user WHERE request_id = '$request_id' ");
+    $usersArray[] =[];
+    while($row = $result->fetch_assoc()) {
+        $usersArray[] = $row['user_id'];
+    }
+
+    $request['users'] = $usersArray;
+    $request['dep_users'] = $dep_users;
+    //if(mysqli_num_rows($query_run) == 1)
+   // {
+       // $request = mysqli_fetch_array($query_run);
 
         $res = [
             'status' => 200,
@@ -116,27 +128,28 @@ if(isset($_GET['request_id']))
         ];
         echo json_encode($res);
         return;
-    }
-    else
-    {
-        $res = [
-            'status' => 404,
-            'message' => 'Request Id Not Found'
-        ];
-        echo json_encode($res);
-        return;
-    }
+  //  }
+    // else
+    // {
+    //     $res = [
+    //         'status' => 404,
+    //         'message' => 'Request Id Not Found'
+    //     ];
+    //     echo json_encode($res);
+    //     return;
+    // }
 }
 
 //-------------------to change request status--------------------//
 
-$request_id = mysqli_real_escape_string($con, $_GET['r_id']);
-$request_status = mysqli_real_escape_string($con, $_GET['request_status']);
-$updatequery1 = "UPDATE support SET request_status=$request_status WHERE r_id=$request_id";
+$request_id = mysqli_real_escape_string($con, $_GET['id']);
+$request_status = mysqli_real_escape_string($con, $_GET['status']);
+$updatequery1 = "UPDATE requests SET status=$request_status WHERE id=$request_id";
 mysqli_query($con,$updatequery1);
 header('location:support.php');
 
 //==========================================//
+
 
 ?>
 
